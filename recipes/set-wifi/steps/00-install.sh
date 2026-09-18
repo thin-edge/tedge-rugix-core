@@ -54,6 +54,8 @@ type=wifi
 
 [wifi]
 mode=infrastructure
+# disable power save mode
+powersave=2
 ssid=${RECIPE_PARAM_SSID}
 
 [wifi-security]
