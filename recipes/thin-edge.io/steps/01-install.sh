@@ -83,7 +83,6 @@ download_file_with_retries 3 thin-edge.io/install.sh | sh -s -- --channel "$RECI
 # Install collectd
 apt-get install -y -o DPkg::Options::=--force-confnew --no-install-recommends \
     mosquitto-clients \
-    tedge-command-plugin \
     tedge-collectd-setup \
     tedge-monit-setup \
     tedge-inventory-plugin
