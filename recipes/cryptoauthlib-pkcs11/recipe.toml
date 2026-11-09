@@ -1,0 +1,6 @@
+description = "Install cryptoauthlib-pkcs11 to use with the secure element ATECC608A/B from Microchip"
+dependencies = [
+    "core/pkg-update",
+    "thin-edge.io",
+    "tedge-community-repo",
+]
