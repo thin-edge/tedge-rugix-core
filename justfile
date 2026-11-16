@@ -19,6 +19,9 @@ SYSTEM := env("SYSTEM", DEFAULT_SYSTEM)
 # Use git-5667b45 until rugix-bakery >=0.9.3 is released
 export RUGIX_VERSION := env_var_or_default("RUGIX_VERSION", "git-5667b45")
 
+# Recipe parameter overrides (e.g. pinned rugix-ctrl version), relative to the project dir
+RUGIX_PARAM_FILE := env_var_or_default("RUGIX_PARAM_FILE", "rugix-params.toml")
+
 # Default version (info only)
 export VERSION := env_var_or_default("VERSION", `date +'%Y%m%d.%H%M'`)
 
@@ -59,6 +62,7 @@ build-setup:
 # Note: use default output and rename later. see https://github.com/silitics/rugix/issues/53
 build-image: build-setup
     ./run-bakery bake image \
+        --param-file "{{RUGIX_PARAM_FILE}}" \
         --release-id "{{RELEASE_ID}}" \
         --release-version "{{VERSION}}" \
         {{SYSTEM}}
@@ -66,6 +70,7 @@ build-image: build-setup
 # Build bundle (uncompressed)
 build-bundle-uncompressed OUTPUT="system.rugixb": build-setup
     ./run-bakery bake bundle \
+        --param-file "{{RUGIX_PARAM_FILE}}" \
         --release-id "{{RELEASE_ID}}" \
         --release-version "{{VERSION}}" \
         --without-compression \
@@ -75,6 +80,7 @@ build-bundle-uncompressed OUTPUT="system.rugixb": build-setup
 # Build build (compressed)
 build-bundle OUTPUT="system.rugixb": build-setup
     ./run-bakery bake bundle \
+        --param-file "{{RUGIX_PARAM_FILE}}" \
         --release-id "{{RELEASE_ID}}" \
         --release-version "{{VERSION}}" \
         {{SYSTEM}} \
@@ -87,6 +93,7 @@ test:
 # Start vm
 start-vm: prepare
     ./run-bakery run \
+        --param-file "{{RUGIX_PARAM_FILE}}" \
         --release-id "{{RELEASE_ID}}" \
         --release-version "{{VERSION}}" \
         {{SYSTEM}} ||:
