@@ -1,0 +1,10 @@
+# Recipe parameter overrides passed to rugix-bakery via --param-file.
+# Keys are recipe names; these apply to every layer, including the target
+# layers that rugix-bakery adds itself (e.g. generic-grub-efi, rpi-tryboot).
+
+# Pin Rugix Ctrl to an exact release. The default ("v1") makes the recipe
+# query the GitHub API without authentication to resolve the latest v1.x tag,
+# which fails with HTTP 403 once the runner's shared rate limit is exhausted.
+# An exact tag only downloads release assets, which are not rate limited.
+[rugix-ctrl]
+version = "v1.4.0"
